@@ -8,5 +8,6 @@
     <PackageReleaseNotes>$(RepositoryUrl)/releases</PackageReleaseNotes>
     <PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+	<HighEntropyVA>true</HighEntropyVA>
   </PropertyGroup>
 </Project>
