@@ -74,7 +74,7 @@ The service can be configured in its [appsettings.json](src/appsettings.json) fi
 
 ## Other Industrial IoT Solution Accelerator components
 
-* OPC GDS service (Coming soon)
+* OPC GDS Vault service (Coming soon)
 * [OPC Twin Registry service](https://github.com/Azure/azure-iiot-opc-twin-registry)
 * [OPC Twin Onboarding service](https://github.com/Azure/azure-iiot-opc-twin-onboarding)
 * OPC Twin common business logic (Coming soon)
