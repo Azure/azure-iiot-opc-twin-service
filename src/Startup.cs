@@ -77,6 +77,8 @@ namespace Microsoft.Azure.IIoT.OpcUa.Services.Twin {
         /// <returns></returns>
         public IServiceProvider ConfigureServices(IServiceCollection services) {
 
+            services.AddLogging(o => o.AddConsole().AddDebug());
+
             // Setup (not enabling yet) CORS
             services.AddCors();
 
@@ -163,7 +165,7 @@ namespace Microsoft.Azure.IIoT.OpcUa.Services.Twin {
             builder.RegisterInstance(Config)
                 .AsImplementedInterfaces().SingleInstance();
             // Register logger
-            builder.RegisterType<ExtensionLogger>()
+            builder.RegisterType<TraceLogger>()
                 .AsImplementedInterfaces().SingleInstance();
 
             // CORS setup
