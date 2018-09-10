@@ -151,8 +151,7 @@ namespace Microsoft.Azure.IIoT.OpcUa.Services.Twin {
         }
 
         /// <summary>
-        /// Autofac configuration. Find more information here:
-        /// see http://docs.autofac.org/en/latest/integration/aspnetcore.html
+        /// Autofac configuration.
         /// </summary>
         public IContainer ConfigureContainer(IServiceCollection services) {
             var builder = new ContainerBuilder();
@@ -160,12 +159,13 @@ namespace Microsoft.Azure.IIoT.OpcUa.Services.Twin {
             // Populate from services di
             builder.Populate(services);
 
-            // Register logger
-            builder.RegisterInstance(Config.Logger)
-                .AsImplementedInterfaces().SingleInstance();
             // Register configuration interfaces
             builder.RegisterInstance(Config)
                 .AsImplementedInterfaces().SingleInstance();
+            // Register logger
+            builder.RegisterType<ExtensionLogger>()
+                .AsImplementedInterfaces().SingleInstance();
+
             // CORS setup
             builder.RegisterType<CorsSetup>()
                 .AsImplementedInterfaces().SingleInstance();
