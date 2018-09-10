@@ -53,19 +53,17 @@ namespace Microsoft.Azure.IIoT.OpcUa.Services.Twin {
         /// Created through builder
         /// </summary>
         /// <param name="env"></param>
-        public Startup(IHostingEnvironment env) {
+        /// <param name="configuration"></param>
+        public Startup(IHostingEnvironment env, IConfiguration configuration) {
             Environment = env;
-
-            var config = new ConfigurationBuilder()
+            Config = new Config(new ConfigurationBuilder()
+                .AddConfiguration(configuration)
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile(
                     "appsettings.json", true, true)
                 .AddJsonFile(
                     $"appsettings.{env.EnvironmentName}.json", true, true)
-                .AddEnvironmentVariables()
-                .Build();
-
-            Config = new Config(config);
+                .Build());
         }
 
         /// <summary>
@@ -95,12 +93,15 @@ namespace Microsoft.Azure.IIoT.OpcUa.Services.Twin {
             // services.AddHttpClient();
 
             // Add controllers as services so they'll be resolved.
-            services.AddMvc().AddControllersAsServices().AddJsonOptions(options => {
-                options.SerializerSettings.Formatting = Formatting.Indented;
-                options.SerializerSettings.Converters.Add(new ExceptionConverter(
-                    Environment.IsDevelopment()));
-                options.SerializerSettings.MaxDepth = 10;
-            });
+            services.AddMvc()
+                .AddApplicationPart(GetType().Assembly)
+                .AddControllersAsServices()
+                .AddJsonOptions(options => {
+                    options.SerializerSettings.Formatting = Formatting.Indented;
+                    options.SerializerSettings.Converters.Add(new ExceptionConverter(
+                        Environment.IsDevelopment()));
+                    options.SerializerSettings.MaxDepth = 10;
+                });
 
             services.AddSwagger(Config, new Info {
                 Title = ServiceInfo.NAME,
