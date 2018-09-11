@@ -84,13 +84,6 @@ namespace Microsoft.Azure.IIoT.OpcUa.Services.Twin.v1.Models {
         }
 
         /// <summary>
-        /// Display name
-        /// </summary>
-        [JsonProperty(PropertyName = "displayName",
-            NullValueHandling = NullValueHandling.Ignore)]
-        public string DisplayName { get; set; }
-
-        /// <summary>
         /// Type of node
         /// </summary>
         [JsonProperty(PropertyName = "nodeClass",
@@ -98,7 +91,14 @@ namespace Microsoft.Azure.IIoT.OpcUa.Services.Twin.v1.Models {
         public NodeClass? NodeClass { get; set; }
 
         /// <summary>
-        /// Id of node and parent id.
+        /// Display name
+        /// </summary>
+        [JsonProperty(PropertyName = "displayName",
+            NullValueHandling = NullValueHandling.Ignore)]
+        public string DisplayName { get; set; }
+
+        /// <summary>
+        /// Id of node.
         /// (Mandatory).
         /// </summary>
         [JsonProperty(PropertyName = "id")]
@@ -113,8 +113,9 @@ namespace Microsoft.Azure.IIoT.OpcUa.Services.Twin.v1.Models {
         public string Description { get; set; }
 
         /// <summary>
-        /// Whether node has children
-        /// (default: false)
+        /// Whether node has children which are defined as
+        /// any forward hierarchical references.
+        /// (default: unknown)
         /// </summary>
         [JsonProperty(PropertyName = "children",
             NullValueHandling = NullValueHandling.Ignore)]
