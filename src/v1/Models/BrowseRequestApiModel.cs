@@ -7,10 +7,9 @@ namespace Microsoft.Azure.IIoT.OpcUa.Services.Twin.v1.Models {
     using Microsoft.Azure.IIoT.OpcUa.Models;
     using Newtonsoft.Json;
     using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
 
     /// <summary>
-    /// browse request model for webservice api
+    /// Browse request model for webservice api
     /// </summary>
     public class BrowseRequestApiModel {
 
@@ -32,6 +31,8 @@ namespace Microsoft.Azure.IIoT.OpcUa.Services.Twin.v1.Models {
             TargetNodesOnly = model.TargetNodesOnly;
             Elevation = model.Elevation == null ? null :
                 new AuthenticationApiModel(model.Elevation);
+            View = model.View == null ? null :
+                new BrowseViewApiModel(model.View);
         }
 
         /// <summary>
@@ -43,6 +44,7 @@ namespace Microsoft.Azure.IIoT.OpcUa.Services.Twin.v1.Models {
                 NodeId = NodeId,
                 MaxReferencesToReturn = MaxReferencesToReturn,
                 Direction = Direction,
+                View = View?.ToServiceModel(),
                 ReferenceTypeId = ReferenceTypeId,
                 Elevation = Elevation?.ToServiceModel(),
                 TargetNodesOnly = TargetNodesOnly,
@@ -65,6 +67,15 @@ namespace Microsoft.Azure.IIoT.OpcUa.Services.Twin.v1.Models {
             NullValueHandling = NullValueHandling.Ignore)]
         [DefaultValue(null)]
         public BrowseDirection? Direction { get; set; }
+
+        /// <summary>
+        /// View to browse
+        /// (default: null = new view = All nodes).
+        /// </summary>
+        [JsonProperty(PropertyName = "view",
+            NullValueHandling = NullValueHandling.Ignore)]
+        [DefaultValue(null)]
+        public BrowseViewApiModel View { get; set; }
 
         /// <summary>
         /// Reference types to browse.
