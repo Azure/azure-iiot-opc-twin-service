@@ -16,7 +16,7 @@ services:
     volumes:
       - /app/certs:/app/certs:ro
   registryservice:
-    image: marcschier/azure-iiot-opc-ua-registry-service:latest
+    image: marcschier/azure-iiot-opc-ua-registry-service:1.0.1
     restart: always
     environment:
       - PCS_IOTHUB_CONNSTRING
@@ -29,7 +29,7 @@ services:
       - PCS_WEBUI_AUTH_AAD_TENANT
       - PCS_CORS_WHITELIST
   onboardingservice:
-    image: marcschier/azure-iiot-opc-ua-onboarding-service:latest
+    image: marcschier/azure-iiot-opc-ua-onboarding-service:1.0.1
     restart: always
     environment:
       - PCS_IOTHUB_CONNSTRING
@@ -41,7 +41,7 @@ services:
       - PCS_IOTHUBREACT_AZUREBLOB_KEY
       - PCS_IOTHUBREACT_AZUREBLOB_ENDPOINT_SUFFIX
   twinservice:
-    image: marcschier/azure-iiot-opc-ua-twin-service:latest
+    image: marcschier/azure-iiot-opc-ua-twin-service:1.0.1
     restart: always
     environment:
       - PCS_IOTHUB_CONNSTRING
@@ -54,7 +54,7 @@ services:
       - PCS_WEBUI_AUTH_AAD_TENANT
       - PCS_CORS_WHITELIST
   gatewayservice:
-    image: marcschier/azure-iiot-opc-ua-gateway-service:latest
+    image: marcschier/azure-iiot-opc-ua-gateway-service:1.0.1
     ports:
       - "4840:51111"
     restart: always
@@ -69,7 +69,7 @@ services:
       - PCS_WEBUI_AUTH_AAD_TENANT
       - PCS_CORS_WHITELIST
   twinwebui:
-    image: marcschier/azure-iiot-opc-twin-webui:latest
+    image: marcschier/azure-iiot-opc-twin-webui:1.0.1
     restart: always
     command: npm start
     environment:
