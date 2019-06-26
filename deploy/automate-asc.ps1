@@ -21,8 +21,7 @@
 #*******************************************************************************************************
 # Get Access token using AzureRM module
 #*******************************************************************************************************
-function Get-AzureRmCachedAccessToken()
-{
+function Get-AzureRmCachedAccessToken() {
     $ErrorActionPreference = 'Stop'
   
     if(-not (Get-Module AzureRm.Profile)) {
@@ -53,8 +52,7 @@ function Get-AzureRmCachedAccessToken()
 #*******************************************************************************************************
 # Get an access token
 #*******************************************************************************************************
-function Get-AzureRmBearerToken()
-{
+function Get-AzureRmBearerToken() {
     $ErrorActionPreference = 'Stop'
     ('Bearer {0}' -f (Get-AzureRmCachedAccessToken))
 }
@@ -62,8 +60,7 @@ function Get-AzureRmBearerToken()
 #***************************************************************************************************************************
 # Set Azure Sentinel Solution to Log Analytics workspace, enable ASC for IoT and create custom alert for security assessment
 #***************************************************************************************************************************
-function SetSolutionEnableASCForIotAndCreateAlert()
-{
+function SetSolutionEnableASCForIotAndCreateAlert() {
 	Param(
         [string] $subscriptionId,
 		[string] $resourceGroupName,
