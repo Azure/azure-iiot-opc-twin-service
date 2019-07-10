@@ -100,8 +100,7 @@ namespace Microsoft.Azure.IIoT.Services.OpcUa.Onboarding {
                 .AsImplementedInterfaces().SingleInstance();
 
             // register logger
-            var logger = new LoggerConfiguration().ApplicationInsights(configuration).CreateLogger();
-            builder.RegisterLogger(logger);
+            builder.RegisterLogger(LogEx.ApplicationInsights(configuration));
 
             // Register http client module
             builder.RegisterModule<HttpClientModule>();

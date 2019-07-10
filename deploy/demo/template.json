@@ -365,24 +365,24 @@
              }
         },
         "appInsightsName": {
-                "type": "string",
-                "defaultValue": "[concat('workspace-', take(uniqueString(subscription().subscriptionId, resourceGroup().id, parameters('solutionName')), 5))]",
-                "metadata": {
-                    "description": "Specifies the name of application insights."
-                }
-            },
+             "type": "string",
+             "defaultValue": "[concat('appinsights-', take(uniqueString(subscription().subscriptionId, resourceGroup().id, parameters('solutionName')), 5))]",
+             "metadata": {
+                  "description": "Specifies the name of application insights."
+             }
+        },
         "appInsightsType": {
-                "type": "string",
-                "defaultValue": "web",
-                "allowedValues": [
+             "type": "string",
+             "defaultValue": "web",
+             "allowedValues": [
                     "web",
                     "java",
                     "other"
                 ],
-                "metadata": {
-                    "description": "Specifies the application insights type."
+              "metadata": {
+                  "description": "Specifies the application insights type."
                 }
-            },
+        },
         "appInsightsPriceCode": {
                 "type": "int",
                 "defaultValue": 1,
@@ -393,7 +393,7 @@
                 "metadata": {
                     "description": "1 = Per GB (Basic), 2 = Per Node (Enterprise)"
                 }
-            },
+        },
         "appInsightsDailyQuota": {
                 "type": "int",
                 "defaultValue": 100,
@@ -401,14 +401,14 @@
                 "metadata": {
                     "description": "Specifies daily quota in GB."
                 }
-            },
+        },
         "appInsightsDailyQuotaResetTime": {
                 "type": "int",
                 "defaultValue": 24,
                 "metadata": {
                     "description": "Specifies daily quota reset hour in UTC (0 to 23). Values outside the range will get a random reset hour."
                 }
-            },
+         },
         "appInsightsWarningThreshold": {
                 "type": "int",
                 "defaultValue": 90,
@@ -417,7 +417,7 @@
                 "metadata": {
                     "description": "Specifies the % value of daily quota after which warning mail to be sent. "
                 }
-            }
+        }
     },
     "variables": {
         "location": "[resourceGroup().location]",
@@ -469,7 +469,8 @@
                 "Application Insights Enterprise"
             ],
         "appInsightsPricePlan": "[take(variables('appInsightsPriceArray'),parameters('appInsightsPriceCode'))]",
-        "appInsightsBillingPlan": "[concat(parameters('appInsightsName'),'/', variables('appInsightsPricePlan')[0])]"
+        "appInsightsBillingPlan": "[concat(parameters('appInsightsName'),'/', variables('appInsightsPricePlan')[0])]",
+        "appInsightsVersion": "2014-04-01"
     },
     "resources": [
         {
@@ -1046,8 +1047,8 @@
             "value": "[parameters('appInsightsName')]"
         },
         "appinsights-instrumentationkey": {
-        "type": "string",
-        "value": "[reference(resourceId('Microsoft.Insights/components', parameters('appInsightsName')), '2014-04-01').InstrumentationKey]"
+            "type": "string",
+            "value": "[reference(resourceId('Microsoft.Insights/components', parameters('appInsightsName')), variables('appInsightsVersion').InstrumentationKey]"
         }
     }
 }
