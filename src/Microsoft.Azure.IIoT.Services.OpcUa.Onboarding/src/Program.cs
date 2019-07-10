@@ -94,13 +94,14 @@ namespace Microsoft.Azure.IIoT.Services.OpcUa.Onboarding {
 
             var config = new Config(ServiceInfo.ID, configuration);
             var builder = new ContainerBuilder();
-
+            
             // Register configuration interfaces
             builder.RegisterInstance(config)
                 .AsImplementedInterfaces().SingleInstance();
 
             // register logger
-            builder.RegisterLogger(LogEx.Console());
+            var logger = new LoggerConfiguration().ApplicationInsights(configuration).CreateLogger();
+            builder.RegisterLogger(logger);
 
             // Register http client module
             builder.RegisterModule<HttpClientModule>();

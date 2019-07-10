@@ -170,7 +170,8 @@ namespace Microsoft.Azure.IIoT.Services.OpcUa.Registry {
                 .AsImplementedInterfaces().SingleInstance();
 
             // Register logger
-            builder.RegisterLogger();
+            var logger = new LoggerConfiguration().ApplicationInsights(Config.Configuration).CreateLogger();
+            builder.RegisterLogger(logger);
 
             // Diagnostics
             builder.RegisterType<AuditLogFilter>()
