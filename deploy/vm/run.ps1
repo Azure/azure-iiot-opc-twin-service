@@ -49,7 +49,7 @@ Function GetEnvironmentVariables() {
     $EVENTHUB_NAME = $deployment.Outputs["eventhub-name"].Value
     $AZURE_WEBSITE = $deployment.Outputs["azureWebsite"].Value
     $WORKSPACE_NAME = $deployment.Outputs["workspace-name"].Value
-	$APPINSIGHTS_NAME = $deployment.Outputs["appinsights-name"].Value
+    $APPINSIGHTS_NAME = $deployment.Outputs["appinsights-name"].Value
     $APPINSIGHTS_INSTRUMENTATIONKEY = $deployment.Outputs["appinsights-instrumentationkey"].Value
 
     Write-Output `
