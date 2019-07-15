@@ -371,18 +371,6 @@
                   "description": "Specifies the name of application insights."
              }
         },
-        "appInsightsType": {
-             "type": "string",
-             "defaultValue": "web",
-             "allowedValues": [
-                    "web",
-                    "java",
-                    "other"
-                ],
-              "metadata": {
-                  "description": "Specifies the application insights type."
-                }
-        },
         "appInsightsPriceCode": {
                 "type": "int",
                 "defaultValue": 1,
@@ -686,7 +674,6 @@
         },
         {
              "type": "microsoft.insights/components",
-             "kind": "[parameters('appInsightsType')]",
              "name": "[parameters('appInsightsName')]",
              "apiVersion": "2014-04-01",
              "location": "[variables('location')]",
